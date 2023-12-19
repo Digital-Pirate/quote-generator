@@ -14,6 +14,12 @@ function newQuote() {
     authorText.textContent = quote.author;
     // authorText.textContent =
   }
+  // reduce font size for long quotes
+  if (quote.text.length > 120) {
+    quoteText.classList.add("long-quote");
+  } else {
+    quoteText.classList.remove("long-quote");
+  }
   quoteText.textContent = quote.text;
 }
 
@@ -33,6 +39,15 @@ async function getQuotes() {
     //Catch Error
   }
 }
+// tweet
+function tweetQuote() {
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+  window.open(twitterUrl, "_blank");
+}
+
+// event listner
+newQuoteBtn.addEventListener("click", newQuote);
+twitterBtn.addEventListener("click", tweetQuote);
 
 getQuotes();
 // newQuote();
